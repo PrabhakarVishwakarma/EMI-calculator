@@ -11,9 +11,7 @@ st.set_page_config(
 st.title("💰 EMI Calculator")
 st.write("Calculate your EMI and view the repayment schedule.")
 
-# -----------------------------
-# Sidebar Inputs
-# -----------------------------
+
 
 st.sidebar.header("Loan Details")
 
@@ -38,9 +36,6 @@ years = st.sidebar.number_input(
     step=1
 )
 
-# -----------------------------
-# EMI Function
-# -----------------------------
 
 r = annual_rate / (12 * 100)
 n = years * 12
@@ -78,9 +73,7 @@ for month in range(1, n + 1):
 
 df = pd.DataFrame(data)
 
-# -----------------------------
-# Top Metrics
-# -----------------------------
+
 
 col1, col2, col3 = st.columns(3)
 
@@ -92,31 +85,25 @@ col3.metric("Total Payment", f"₹{principal+total_interest:,.2f}")
 
 st.divider()
 
-# -----------------------------
-# First 5 Months Preview
-# -----------------------------
+
 
 st.subheader("First 5 Months")
 
 st.dataframe(df.head(), use_container_width=True)
 
-# -----------------------------
-# Full Schedule
-# -----------------------------
+
 
 show = st.checkbox("Show Full Repayment Schedule")
 
 if show:
     st.dataframe(df, use_container_width=True)
 
-# -----------------------------
-# Download CSV
-# -----------------------------
+
 
 csv = df.to_csv(index=False).encode()
 
 st.download_button(
-    "📥 Download Schedule",
+    " Download Schedule",
     csv,
     file_name="EMI_Schedule.csv",
     mime="text/csv"
@@ -124,9 +111,7 @@ st.download_button(
 
 st.divider()
 
-# -----------------------------
-# Loan Balance Graph
-# -----------------------------
+
 
 st.subheader("Loan Balance")
 
@@ -140,9 +125,7 @@ ax.set_ylabel("Remaining Loan")
 
 st.pyplot(fig)
 
-# -----------------------------
-# Interest vs Principal
-# -----------------------------
+
 
 st.subheader("Interest vs Principal")
 
